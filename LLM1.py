@@ -15,7 +15,8 @@ messages = [
     {
         "role": "user",
         "content": [
-            {"type": "text", "text": ""}
+            {"type": "image", "image": "https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/bee.jpg"},
+            {"type": "text", "text": "Describe this image in detail."}
         ]
     }
 ]
@@ -33,4 +34,3 @@ with torch.inference_mode():
 
 decoded = processor.decode(generation, skip_special_tokens=True)
 print(decoded)
-
