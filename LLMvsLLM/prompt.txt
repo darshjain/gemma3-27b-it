@@ -1,6 +1,6 @@
 Task: Generate a C++ program that contains a subtle logical or syntactical fault. After generating the program, identify the specific line or segment containing the fault.
 
-Output Format: Output Format: Present the output strictly as a single, parsable JSON object. Crucially, the entire output must consist only of the JSON object itself, with no surrounding text, explanations, or Markdown formatting (like ```json). The required JSON structure is:
+Output Format: The final output must be presented strictly as a single, parsable JSON object, suitable for automated processing. Crucially, ensure the entire response consists only of this JSON object. Do not include any introductory text, concluding remarks, explanations, or Markdown formatting (like ```json) outside of the JSON structure itself. Furthermore, within the JSON, the Fault field must contain only the specific code segment identifying the fault, not an explanation. The required JSON structure is:
 
 {
   "Program": "#include <tcclib.h>

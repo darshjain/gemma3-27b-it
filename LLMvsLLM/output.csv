@@ -4,15 +4,95 @@ program,fault
 
 int main() {
   std::vector<int> data = {1, 2, 3, 4, 5};
-  int index = 0;
-  while (index < data.size()) {
-    std::cout << data[index] << std::endl;
-    index++;
-    if (index == data.size()) {
-      data.push_back(data[0]);
+  int sum = 0;
+  for (size_t i = 0; i <= data.size(); ++i) {
+    sum += data[i];
+  }
+  std::cout << ""Sum: "" << sum << std::endl;
+  return 0;
+}",i <= data.size()
+"#include <iostream>
+#include <string>
+#include <algorithm>
+
+int main() {
+  std::string input = ""hello"";
+  std::string reversed_input = input;
+  std::reverse(reversed_input.begin(), reversed_input.end());
+  
+  if (input == reversed_input) {
+    std::cout << ""Palindrome!"" << std::endl;
+  } else {
+    std::cout << ""Not a palindrome."" << std::endl;
+  }
+  
+  return 0;
+}",if (input == reversed_input)
+"#include <iostream>
+#include <vector>
+#include <numeric>
+
+int main() {
+  std::vector<int> numbers = {1, 2, 3, 4, 5};
+  int target = 10;
+
+  auto it = std::find_if(numbers.begin(), numbers.end(), [target](int n) {
+    return target % n == 0;
+  });
+
+  if (it != numbers.end()) {
+    std::cout << ""Found a divisor: "" << *it << std::endl;
+  } else {
+    std::cout << ""No divisor found."" << std::endl;
+  }
+
+  return 0;
+}",target % n == 0
+"#include <iostream>
+#include <string>
+#include <map>
+
+int main() {
+  std::map<std::string, int> word_counts;
+  std::string text = ""the quick brown fox jumps over the lazy dog"";
+  std::string word;
+  
+  for (char c : text) {
+    if (std::isspace(c)) {
+      if (!word.empty()) {
+        word_counts[word]++;
+        word = """";
+      }
+    } else {
+      word += c;
     }
   }
+
+  if (!word.empty()) {
+    word_counts[word]++;
+  }
+
+  for (auto const& [key, val] : word_counts) {
+    std::cout << key << "": "" << val << std::endl;
+  }
+
   return 0;
-}","if (index == data.size()) {
-      data.push_back(data[0]);
-    }"
+}",if (!word.empty()) { word_counts[word]++; }
+"#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+  std::vector<int> values = {5, 2, 8, 1, 9, 4};
+  std::vector<int> sorted_values = values;
+  std::sort(sorted_values.begin(), sorted_values.end());
+
+  auto it = std::find(sorted_values.begin(), sorted_values.end(), 8);
+
+  if (it != sorted_values.end()) {
+    size_t index = std::distance(sorted_values.begin(), it);
+    std::cout << ""Index of 8 in sorted vector: "" << index << std::endl;
+  }
+
+  return 0;
+}","size_t index = std::distance(sorted_values.begin(), it);"
