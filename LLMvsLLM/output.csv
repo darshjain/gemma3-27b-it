@@ -96,3 +96,1804 @@ int main() {
 
   return 0;
 }","size_t index = std::distance(sorted_values.begin(), it);"
+"#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+    std::vector<int> data = {1, 2, 3, 4, 5};
+    std::vector<int> filtered_data;
+
+    std::copy_if(data.begin(), data.end(), std::back_inserter(filtered_data), [](int x) { return x % 2 == 0; });
+
+    for (size_t i = 0; i <= filtered_data.size(); ++i) {
+        std::cout << filtered_data[i] << std::endl; // Potential out-of-bounds access
+    }
+
+    return 0;
+}",filtered_data[i]
+"#include <iostream>
+#include <string>
+#include <vector>
+
+class DataProcessor {
+public:
+    DataProcessor(const std::vector<std::string>& input) : data_(input) {}
+
+    void processData() {
+        for (size_t i = 0; i < data_.size(); ++i) {
+            std::string modified_string = modifyString(data_[i]);
+            data_[i] = modified_string;
+        }
+    }
+
+private:
+    std::string modifyString(const std::string& str) {
+        std::string result = str;
+        for (char& c : result) {
+            c = std::toupper(c); // Assuming ASCII characters
+        }
+        return result;
+    }
+
+    std::vector<std::string> data_; // Stores the strings
+};
+
+int main() {
+    std::vector<std::string> my_data = {""hello"", ""world"", ""cpp""};
+    DataProcessor processor(my_data);
+    processor.processData();
+
+    for (const std::string& s : my_data) {
+        std::cout << s << std::endl;
+    }
+
+    return 0;
+}",c = std::toupper(c);
+"#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> data = {1, 2, 3, 4, 5};
+  size_t index = 0;
+
+  while (index < data.size()) {
+    if (data[index] % 2 == 0) {
+      data.erase(data.begin() + index);
+      index++; // This increment is the fault
+    }
+    index++;
+  }
+
+  for (int val : data) {
+    std::cout << val << "" "";
+  }
+  std::cout << std::endl;
+
+  return 0;
+}",index++; // This increment is the fault
+"#include <iostream>
+#include <string>
+#include <algorithm>
+
+int main() {
+  std::string input = ""hello world"";
+  std::string reversed_input;
+
+  std::reverse_copy(input.begin(), input.end(), std::back_inserter(reversed_input));
+
+  std::string combined_string = reversed_input + "" "" + input;
+
+  std::cout << combined_string << std::endl;
+
+  // Attempt to find the first occurrence of ""world"" in the combined string
+  size_t position = combined_string.find(""world"");
+
+  // If found, attempt to insert ""!"" at the found position.  This is the faulty line.
+  if (position != std::string::npos) {
+    combined_string.insert(position, ""!"");
+  }
+
+  std::cout << combined_string << std::endl;
+
+  return 0;
+}","combined_string.insert(position, ""!"");"
+"#include <iostream>
+#include <vector>
+
+int main() {
+    std::vector<int> data = {1, 2, 3, 4, 5};
+    int index = 0;
+    while (index < data.size()) {
+        std::cout << data[index] << std::endl;
+        index++;
+        if (index == data.size()) {
+            data.push_back(data[0]);
+        }
+    }
+    return 0;
+}",data.push_back(data[0]);
+"#include <iostream>
+#include <string>
+#include <algorithm>
+
+int main() {
+    std::string input = ""hello"";
+    std::string reversed_input = input;
+    std::reverse(reversed_input.begin(), reversed_input.end());
+
+    if (input == reversed_input) {
+        std::cout << ""Palindrome!"" << std::endl;
+    } else {
+        std::cout << ""Not a palindrome."" << std::endl;
+    }
+
+    input = ""racecar"";
+    reversed_input = input;
+    std::reverse(reversed_input.begin(), reversed_input.end());
+
+    if (input != reversed_input) {
+        std::cout << ""Palindrome!"" << std::endl;
+    } else {
+        std::cout << ""Not a palindrome."" << std::endl;
+    }
+
+    return 0;
+}",if (input != reversed_input)
+"#include <iostream>
+#include <vector>
+
+int main() {
+    std::vector<int> numbers = {1, 2, 3, 4, 5};
+    int sum = 0;
+    for (int i = 0; i <= numbers.size(); ++i) {
+        sum += numbers[i];
+    }
+    std::cout << ""Sum: "" << sum << std::endl;
+    return 0;
+}",i <= numbers.size()
+"#include <iostream>
+#include <string>
+
+int main() {
+    std::string message = ""Hello, world!"";
+    std::string key = ""key"";
+    std::string encrypted_message = """";
+
+    for (size_t i = 0; i < message.length(); ++i) {
+        encrypted_message += message[i] ^ key[i % key.length()];
+    }
+
+    std::cout << ""Encrypted: "" << encrypted_message << std::endl;
+
+    std::string decrypted_message = """";
+    for (size_t i = 0; i < encrypted_message.length(); ++i) {
+        decrypted_message += encrypted_message[i] ^ key[i % key.length()];
+    }
+
+    std::cout << ""Decrypted: "" << decrypted_message << std::endl;
+
+    return 0;
+}",encrypted_message += message[i] ^ key[i % key.length()];
+"#include <iostream>
+#include <vector>
+#include <functional>
+
+int main() {
+    std::vector<int> data = {1, 2, 3, 4, 5};
+    std::function<void(int)> process = [&](int value) {
+        std::cout << value << std::endl;
+        process(value + 1);
+    };
+
+    process(data[0]);
+
+    return 0;
+}",process(value + 1);
+"#include <iostream>
+#include <algorithm>
+#include <vector>
+
+int main() {
+    std::vector<int> numbers = {5, 2, 8, 1, 9, 4};
+    std::vector<int> sorted_numbers = numbers;
+    std::sort(sorted_numbers.begin(), sorted_numbers.end());
+
+    auto it = std::find(numbers.begin(), numbers.end(), sorted_numbers[0]);
+    if (it != numbers.end()) {
+        numbers.erase(it);
+    }
+
+    for (int num : numbers) {
+        std::cout << num << "" "";
+    }
+    std::cout << std::endl;
+
+    return 0;
+}",numbers.erase(it);
+"#include <iostream>
+#include <map>
+#include <string>
+
+int main() {
+    std::map<std::string, int> counts;
+    counts[""apple""] = 5;
+    counts[""banana""] = 3;
+    counts[""orange""] = 7;
+
+    for (auto const& [key, val] : counts) {
+        std::cout << key << "": "" << val << std::endl;
+    }
+
+    for (auto it = counts.begin(); it != counts.end(); ++it) {
+        if (it->second > 5) {
+            counts.erase(it);
+        }
+    }
+
+    for (auto const& [key, val] : counts) {
+        std::cout << key << "": "" << val << std::endl;
+    }
+
+    return 0;
+}",counts.erase(it);
+"#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+    std::vector<int> data = {1, 2, 3, 4, 5};
+    std::vector<int> result;
+
+    std::transform(data.begin(), data.end(), std::back_inserter(result), [](int x) { return x * 2; });
+
+    for (size_t i = 0; i < result.size(); ++i) {
+        std::cout << result[i] << "" "";
+    }
+    std::cout << std::endl;
+
+    // Attempt to modify the original data while iterating through the result
+    for (int& x : data) {
+        x += 1;
+    }
+
+    for (size_t i = 0; i < result.size(); ++i) {
+        std::cout << result[i] << "" "";
+    }
+    std::cout << std::endl;
+
+    return 0;
+}",x += 1;
+"#include <iostream>
+#include <vector>
+#include <functional>
+#include <numeric>
+
+int main() {
+    std::vector<int> values = {1, 2, 3, 4, 5};
+    int sum = 0;
+
+    std::function<void(int)> accumulate = [&](int value) {
+        sum += value;
+    };
+
+    std::for_each(values.begin(), values.end(), accumulate);
+
+    std::cout << ""Sum: "" << sum << std::endl;
+
+    // Incorrectly capturing 'sum' by value instead of reference
+    int final_sum = sum;
+    std::for_each(values.begin(), values.end(), [&](int value) {
+        final_sum += value;
+    });
+
+    std::cout << ""Final Sum: "" << final_sum << std::endl;
+
+    return 0;
+}",int final_sum = sum;
+"#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> data = {1, 2, 3, 4, 5};
+  int index = 0;
+  while (index < data.size()) {
+    std::cout << data[index] << std::endl;
+    index++;
+  }
+  return 0;
+}",index++
+"#include <iostream>
+#include <string>
+#include <algorithm>
+
+int main() {
+  std::string input = ""hello world"";
+  std::string reversed_input = input;
+  std::reverse(reversed_input.begin(), reversed_input.end());
+  if (input == reversed_input) {
+    std::cout << ""Palindrome!\n"";
+  } else {
+    std::cout << ""Not a palindrome.\n"";
+  }
+  return 0;
+}",if (input == reversed_input)
+"#include <iostream>
+#include <vector>
+#include <numeric>
+
+int main() {
+  std::vector<int> numbers = {1, 2, 3, 4, 5};
+  int sum = std::accumulate(numbers.begin(), numbers.end(), 0);
+  double average = static_cast<double>(sum) / numbers.size();
+  std::cout << ""Average: "" << average << std::endl;
+  return 0;
+}",static_cast<double>(sum)
+"#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> data = {1, 2, 3, 4, 5};
+  int sum = 0;
+  for (size_t i = 0; i <= data.size(); ++i) {
+    sum += data[i];
+  }
+  std::cout << ""Sum: "" << sum << std::endl;
+  return 0;
+}",i <= data.size()
+"#include <iostream>
+#include <string>
+#include <algorithm>
+
+int main() {
+  std::string text = ""Hello, World!"";
+  std::string reversed_text = text;
+  std::reverse(reversed_text.begin(), reversed_text.end());
+
+  if (text == reversed_text) {
+    std::cout << ""Palindrome!"" << std::endl;
+  } else {
+    std::cout << ""Not a palindrome."" << std::endl;
+  }
+
+  return 0;
+}",text == reversed_text
+"#include <iostream>
+#include <vector>
+#include <numeric>
+
+int main() {
+  std::vector<double> values = {1.1, 2.2, 3.3, 4.4, 5.5};
+  double total = 0.0;
+  for (auto& value : values) {
+    total += static_cast<int>(value);
+  }
+  std::cout << ""Total: "" << total << std::endl;
+  return 0;
+}",static_cast<int>(value)
+"#include <iostream>
+#include <string>
+#include <algorithm>
+
+int main() {
+  std::string input = ""racecar"";
+  std::string reversed_input = input;
+  std::reverse(reversed_input.begin(), reversed_input.end());
+
+  bool is_palindrome = false;
+  if (input == reversed_input) {
+    is_palindrome = true;
+  }
+
+  if (is_palindrome == false) {
+    std::cout << ""Not a palindrome."" << std::endl;
+  } else {
+    std::cout << ""Palindrome!"" << std::endl;
+  }
+
+  return 0;
+}",is_palindrome == false
+"#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> data = {1, 2, 3, 4, 5};
+  int sum = 0;
+  for (size_t i = 0; i <= data.size(); ++i) {
+    sum += data[i];
+  }
+  std::cout << ""Sum: "" << sum << std::endl;
+  return 0;
+}",i <= data.size()
+"#include <iostream>
+#include <string>
+#include <algorithm>
+
+int main() {
+  std::string text = ""Hello, world!"";
+  std::string pattern = ""world"";
+  size_t pos = text.find(pattern);
+
+  if (pos != std::string::npos) {
+    std::cout << ""Pattern found at position: "" << pos << std::endl;
+  } else {
+    std::cout << ""Pattern not found."" << std::endl;
+  }
+
+  // Attempt to find the pattern again, starting after the first occurrence.
+  pos = text.find(pattern, pos + pattern.length() + 1);
+
+  if (pos != std::string::npos) {
+    std::cout << ""Pattern found at position: "" << pos << std::endl;
+  } else {
+    std::cout << ""Pattern not found."" << std::endl;
+  }
+
+  return 0;
+}",pos + pattern.length() + 1
+"#include <iostream>
+#include <vector>
+#include <numeric>
+
+int main() {
+  std::vector<int> numbers = {1, 2, 3, 4, 5};
+  int threshold = 3;
+  std::vector<int> filtered_numbers;
+
+  std::copy_if(numbers.begin(), numbers.end(), std::back_inserter(filtered_numbers), 
+                [threshold](int n) { return n > threshold; });
+
+  int sum = std::accumulate(filtered_numbers.begin(), filtered_numbers.end(), 0);
+
+  std::cout << ""Sum of numbers greater than "" << threshold << "": "" << sum << std::endl;
+
+  return 0;
+}",[threshold](int n) { return n > threshold; }
+"#include <iostream>
+#include <string>
+#include <algorithm>
+
+int main() {
+  std::string input = ""example"";
+  std::string reversed_input;
+
+  std::reverse_copy(input.begin(), input.end(), std::back_inserter(reversed_input));
+
+  if (input == reversed_input) {
+    std::cout << ""Palindrome!"" << std::endl;
+  } else {
+    std::cout << ""Not a palindrome."" << std::endl;
+  }
+
+  return 0;
+}","std::reverse_copy(input.begin(), input.end(), std::back_inserter(reversed_input));"
+"#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+  std::vector<int> data = {5, 2, 8, 1, 9, 4};
+  std::vector<int> sorted_data = data;
+  std::sort(sorted_data.begin(), sorted_data.end());
+
+  // Find the median
+  size_t size = sorted_data.size();
+  int median = (size % 2 == 0) ? (sorted_data[size / 2 - 1] + sorted_data[size / 2]) / 2 : sorted_data[size / 2];
+
+  std::cout << ""Median: "" << median << std::endl;
+
+  return 0;
+}",(sorted_data[size / 2 - 1] + sorted_data[size / 2]) / 2
+"#include <iostream>
+#include <string>
+#include <map>
+
+int main() {
+  std::map<std::string, int> word_counts;
+  std::string text = ""the quick brown fox jumps over the lazy dog"";
+  std::string word;
+
+  size_t start = 0;
+  size_t end = text.find("" "");
+
+  while (end != std::string::npos) {
+    word = text.substr(start, end - start);
+    word_counts[word]++;
+    start = end + 1;
+    end = text.find("" "", start);
+  }
+
+  word = text.substr(start); // Last word
+  word_counts[word]++;
+
+  for (const auto& pair : word_counts) {
+    std::cout << pair.first << "": "" << pair.second << std::endl;
+  }
+
+  return 0;
+}",word = text.substr(start);
+"#include <iostream>
+#include <vector>
+#include <numeric>
+
+int main() {
+  std::vector<double> values = {1.0, 2.5, 3.7, 4.2, 5.9};
+  double sum = std::accumulate(values.begin(), values.end(), 0.0);
+  double average = sum / values.size();
+
+  std::cout << ""Average: "" << average << std::endl;
+
+  // Calculate standard deviation
+  double sq_sum = std::inner_product(values.begin(), values.end(), values.begin(), 0.0);
+  double stdev = std::sqrt(sq_sum / values.size() - average * average);
+
+  std::cout << ""Standard Deviation: "" << stdev << std::endl;
+
+  return 0;
+}",double stdev = std::sqrt(sq_sum / values.size() - average * average);
+"#include <iostream>
+#include <string>
+#include <vector>
+
+struct Event {
+  std::string name;
+  int timestamp;
+};
+
+int main() {
+  std::vector<Event> events = {
+    {""Login"", 1678886400},
+    {""Logout"", 1678886460},
+    {""Login"", 1678886520},
+    {""Error"", 1678886580},
+    {""Logout"", 1678886640}
+  };
+
+  std::vector<Event> filtered_events;
+  for (const auto& event : events) {
+    if (event.name == ""Login"" || event.name == ""Logout"") {
+      filtered_events.push_back(event);
+    }
+  }
+
+  // Find the duration of the session
+  int session_start = -1;
+  int session_end = -1;
+  for (const auto& event : filtered_events) {
+    if (event.name == ""Login"" && session_start == -1) {
+      session_start = event.timestamp;
+    } else if (event.name == ""Logout"") {
+      session_end = event.timestamp;
+    }
+  }
+
+  int session_duration = session_end - session_start;
+  std::cout << ""Session Duration: "" << session_duration << std::endl;
+
+  return 0;
+}",int session_duration = session_end - session_start;
+"#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+  std::vector<int> data = {5, 2, 8, 1, 9, 4, 7, 3, 6};
+  std::vector<int> sorted_data = data;
+  std::sort(sorted_data.begin(), sorted_data.end());
+
+  int median_index = sorted_data.size() / 2;
+  int median = sorted_data[median_index];
+
+  std::cout << ""Median: "" << median << std::endl;
+
+  // Calculate the mean absolute deviation (MAD)
+  double mean = 0.0;
+  for (int value : data) {
+    mean += value;
+  }
+  mean /= data.size();
+
+  std::vector<double> absolute_deviations;
+  for (int value : data) {
+    absolute_deviations.push_back(std::abs(value - mean));
+  }
+
+  double mad = 0.0;
+  for (double deviation : absolute_deviations) {
+    mad += deviation;
+  }
+  mad /= absolute_deviations.size();
+
+  std::cout << ""MAD: "" << mad << std::endl;
+
+  return 0;
+}","double mad = 0.0;
+  for (double deviation : absolute_deviations) {
+    mad += deviation;
+  }
+  mad /= absolute_deviations.size();"
+"#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+
+int main() {
+  std::vector<std::string> names = {""Alice"", ""Bob"", ""Charlie"", ""David"", ""Eve""};
+  std::vector<int> scores = {85, 92, 78, 95, 88};
+
+  // Create a vector of pairs (score, name)
+  std::vector<std::pair<int, std::string>> score_name_pairs;
+  for (size_t i = 0; i < names.size(); ++i) {
+    score_name_pairs.push_back({scores[i], names[i]});
+  }
+
+  // Sort the pairs by score in descending order
+  std::sort(score_name_pairs.begin(), score_name_pairs.end(), std::greater<>());
+
+  // Print the top 3 scores
+  std::cout << ""Top 3 Scores:\n"";
+  for (int i = 0; i < 3; ++i) {
+    std::cout << score_name_pairs[i].second << "": "" << score_name_pairs[i].first << std::endl;
+  }
+
+  return 0;
+}",for (int i = 0; i < 3; ++i) {
+"#include <iostream>
+#include <vector>
+#include <numeric>
+
+int main() {
+  std::vector<int> numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+
+  // Calculate the sum of even numbers using a lambda
+  int sum_of_evens = 0;
+  std::for_each(numbers.begin(), numbers.end(), [&](int n) {
+    if (n % 2 == 0) {
+      sum_of_evens += n;
+    }
+  });
+
+  std::cout << ""Sum of even numbers: "" << sum_of_evens << std::endl;
+
+  // Calculate the product of odd numbers using accumulate
+  long long product_of_odds = 1;
+  for (int n : numbers) {
+    if (n % 2 != 0) {
+      product_of_odds *= n;
+    }
+  }
+  std::cout << ""Product of odd numbers: "" << product_of_odds << std::endl;
+
+  return 0;
+}",long long product_of_odds = 1;
+"#include <iostream>
+#include <string>
+#include <vector>
+#include <sstream>
+
+int main() {
+  std::string input = ""10,20,30,40,50"";
+  std::vector<int> numbers;
+  std::stringstream ss(input);
+  std::string token;
+
+  while (std::getline(ss, token, ',')) {
+    try {
+      numbers.push_back(std::stoi(token));
+    } catch (const std::invalid_argument& e) {
+      std::cerr << ""Invalid argument: "" << token << std::endl;
+    } catch (const std::out_of_range& e) {
+      std::cerr << ""Out of range: "" << token << std::endl;
+    }
+  }
+
+  // Calculate the average
+  double sum = 0.0;
+  for (int number : numbers) {
+    sum += number;
+  }
+
+  double average = sum / numbers.size();
+  std::cout << ""Average: "" << average << std::endl;
+
+  return 0;
+}",double average = sum / numbers.size();
+"#include <iostream>
+#include <vector>
+#include <algorithm>
+
+struct Point {
+  int x, y;
+};
+
+int main() {
+  std::vector<Point> points = {{1, 2}, {3, 4}, {5, 6}, {7, 8}, {9, 10}};
+
+  // Find the point closest to the origin (0, 0)
+  Point closest_point = points[0];
+  double min_distance = std::sqrt(std::pow(points[0].x, 2) + std::pow(points[0].y, 2));
+
+  for (size_t i = 1; i < points.size(); ++i) {
+    double distance = std::sqrt(std::pow(points[i].x, 2) + std::pow(points[i].y, 2));
+    if (distance < min_distance) {
+      min_distance = distance;
+      closest_point = points[i];
+    }
+  }
+
+  std::cout << ""Closest point: ("" << closest_point.x << "", "" << closest_point.y << "")"" << std::endl;
+
+  return 0;
+}",Point closest_point = points[0];
+"#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <numeric>
+
+int main() {
+  std::vector<int> data = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+
+  // Calculate the running sum
+  std::vector<int> running_sum(data.size());
+  std::partial_sum(data.begin(), data.end(), running_sum.begin());
+
+  // Calculate the differences between consecutive elements in the running sum
+  std::vector<int> differences(running_sum.size() - 1);
+  for (size_t i = 0; i < differences.size(); ++i) {
+    differences[i] = running_sum[i+1] - running_sum[i];
+  }
+
+  // Print the differences
+  for (int diff : differences) {
+    std::cout << diff << "" "";
+  }
+  std::cout << std::endl;
+
+  return 0;
+}",std::vector<int> differences(running_sum.size() - 1);
+"#include <iostream>
+#include <string>
+#include <algorithm>
+#include <vector>
+
+int main() {
+  std::string text = ""This is a test string."";
+  std::vector<char> characters;
+  for (char c : text) {
+    characters.push_back(c);
+  }
+
+  // Find the most frequent character
+  char most_frequent_char = ' ';
+  int max_count = 0;
+
+  for (char c : characters) {
+    int count = std::count(characters.begin(), characters.end(), c);
+    if (count > max_count) {
+      max_count = count;
+      most_frequent_char = c;
+    }
+  }
+
+  std::cout << ""Most frequent character: "" << most_frequent_char << std::endl;
+
+  return 0;
+}",char most_frequent_char = ' ';
+"#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+  std::vector<int> numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+
+  // Calculate the sum of even numbers
+  int sum = 0;
+  for (int number : numbers) {
+    if (number % 2 == 0) {
+      sum += number;
+    }
+  }
+
+  // Calculate the average of even numbers
+  double average = 0.0;
+  if (numbers.size() > 0) {
+      average = static_cast<double>(sum) / numbers.size();
+  }
+
+  std::cout << ""Average of even numbers: "" << average << std::endl;
+
+  return 0;
+}",average = static_cast<double>(sum) / numbers.size();
+"#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+  std::vector<int> data = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+
+  // Create a new vector containing only even numbers
+  std::vector<int> even_numbers;
+  std::copy_if(data.begin(), data.end(), std::back_inserter(even_numbers), [](int n){ return n % 2 == 0; });
+
+  // Calculate the sum of squares of even numbers
+  long long sum_of_squares = 0;
+  for (int num : even_numbers) {
+    sum_of_squares += num * num;
+  }
+
+  // Calculate the average of squares
+  double average_of_squares = 0.0;
+  if (even_numbers.size() > 0) {
+    average_of_squares = static_cast<double>(sum_of_squares) / even_numbers.size();
+  }
+
+  std::cout << ""Average of squares of even numbers: "" << average_of_squares << std::endl;
+
+  return 0;
+}",long long sum_of_squares = 0;
+"#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+
+int main() {
+  std::string input_string = ""hello world"";
+  std::vector<char> char_vector(input_string.begin(), input_string.end());
+
+  // Reverse the vector in place
+  std::reverse(char_vector.begin(), char_vector.end());
+
+  // Convert the reversed vector back to a string
+  std::string reversed_string(char_vector.begin(), char_vector.end());
+
+  // Check if the reversed string is a palindrome
+  bool is_palindrome = (reversed_string == input_string);
+
+  std::cout << ""Original string: "" << input_string << std::endl;
+  std::cout << ""Reversed string: "" << reversed_string << std::endl;
+  std::cout << ""Is palindrome: "" << (is_palindrome ? ""true"" : ""false"") << std::endl;
+
+  return 0;
+}",bool is_palindrome = (reversed_string == input_string);
+"#include <iostream>
+#include <vector>
+#include <numeric>
+
+int main() {
+  std::vector<int> numbers = {1, 2, 3, 4, 5};
+
+  // Calculate the running sum
+  std::vector<int> running_sums(numbers.size());
+  std::partial_sum(numbers.begin(), numbers.end(), running_sums.begin());
+
+  // Calculate the differences between consecutive running sums
+  std::vector<int> differences(numbers.size() - 1);
+  for (size_t i = 0; i < differences.size(); ++i) {
+    differences[i] = running_sums[i+1] - running_sums[i];
+  }
+
+  // Print the differences
+  for (int diff : differences) {
+    std::cout << diff << "" "";
+  }
+  std::cout << std::endl;
+
+  return 0;
+}",std::vector<int> differences(numbers.size() - 1);
+"#include <iostream>
+#include <string>
+#include <map>
+
+int main() {
+  std::map<std::string, int> word_counts;
+  std::string text = ""the quick brown fox jumps over the lazy fox"";
+
+  // Tokenize the text
+  std::string word;
+  for (char c : text) {
+    if (std::isalnum(c)) {
+      word += c;
+    } else {
+      if (!word.empty()) {
+        word_counts[word]++;
+        word = """";
+      }
+    }
+  }
+  // Handle the last word
+  if (!word.empty()) {
+    word_counts[word]++;
+  }
+
+  // Print the word counts
+  for (auto const& [key, val] : word_counts) {
+    std::cout << key << "": "" << val << std::endl;
+  }
+
+  return 0;
+}",if (std::isalnum(c)) {
+"#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+  std::vector<int> data = {5, 2, 8, 1, 9, 4};
+  std::vector<int> sorted_data = data;
+  std::sort(sorted_data.begin(), sorted_data.end());
+
+  // Find the median
+  size_t size = sorted_data.size();
+  double median;
+  if (size % 2 == 0) {
+    median = (sorted_data[size / 2 - 1] + sorted_data[size / 2]) / 2.0;
+  } else {
+    median = sorted_data[size / 2];
+  }
+
+  // Calculate the mean absolute deviation (MAD)
+  double sum_abs_diff = 0.0;
+  for (int value : data) {
+    sum_abs_diff += std::abs(value - median);
+  }
+  double mad = sum_abs_diff / size;
+
+  std::cout << ""Median: "" << median << std::endl;
+  std::cout << ""MAD: "" << mad << std::endl;
+
+  return 0;
+}",double mad = sum_abs_diff / size;
+"#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+
+int main() {
+  std::vector<std::string> names = {""Alice"", ""Bob"", ""Charlie"", ""David"", ""Eve""};
+  std::string search_name = ""Bob"";
+
+  // Find the name using std::find
+  auto it = std::find(names.begin(), names.end(), search_name);
+
+  // Print the index if found
+  if (it != names.end()) {
+    size_t index = std::distance(names.begin(), it);
+    std::cout << ""Name found at index: "" << index << std::endl;
+  } else {
+    std::cout << ""Name not found."" << std::endl;
+  }
+
+  // Attempt to erase the found element (even if not found)
+  names.erase(it);
+
+  // Print the updated vector
+  for (const auto& name : names) {
+    std::cout << name << "" "";
+  }
+  std::cout << std::endl;
+
+  return 0;
+}",names.erase(it);
+"#include <iostream>
+#include <vector>
+#include <functional>
+
+int main() {
+  std::vector<int> numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+  int threshold = 5;
+
+  // Use std::copy_if to create a new vector with numbers above the threshold
+  std::vector<int> filtered_numbers;
+  std::copy_if(numbers.begin(), numbers.end(), std::back_inserter(filtered_numbers), 
+                [threshold](int n) { return n > threshold; });
+
+  // Print the filtered numbers
+  std::cout << ""Numbers greater than "" << threshold << "":"";
+  for (int number : filtered_numbers) {
+    std::cout << "" "" << number;
+  }
+  std::cout << std::endl;
+
+  // Calculate the sum of the filtered numbers using a lambda
+  auto sum_func = [&filtered_numbers]() {
+    int sum = 0;
+    for (int number : filtered_numbers) {
+      sum += number;
+    }
+    return sum;
+  };
+
+  // Print the sum
+  std::cout << ""Sum of filtered numbers: "" << sum_func() << std::endl;
+
+  return 0;
+}",[threshold](int n) { return n > threshold; }
+"#include <iostream>
+#include <string>
+#include <vector>
+#include <sstream>
+
+int main() {
+  std::string input = ""10,20,30,40,50"";
+  std::vector<int> numbers;
+  std::stringstream ss(input);
+  std::string token;
+
+  while (std::getline(ss, token, ',')) {
+    try {
+      numbers.push_back(std::stoi(token));
+    } catch (const std::invalid_argument& e) {
+      std::cerr << ""Invalid argument: "" << token << std::endl;
+    } catch (const std::out_of_range& e) {
+      std::cerr << ""Out of range: "" << token << std::endl;
+    }
+  }
+
+  // Calculate the average
+  double sum = 0.0;
+  for (int number : numbers) {
+    sum += number;
+  }
+  double average = sum / numbers.size();
+
+  std::cout << ""Average: "" << average << std::endl;
+
+  return 0;
+}",double average = sum / numbers.size();
+"#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+  std::vector<int> data = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+  int target = 5;
+
+  // Find the first element greater than the target
+  auto it = std::find_if(data.begin(), data.end(), [target](int x) { return x > target; });
+
+  if (it != data.end()) {
+    // Calculate the distance to the first element greater than the target
+    size_t index = std::distance(data.begin(), it);
+    std::cout << ""First element greater than "" << target << "" is at index: "" << index << std::endl;
+  }
+  else {
+    std::cout << ""No element greater than "" << target << "" found."" << std::endl;
+  }
+
+  //Shift all elements after the found element to the left
+  if (it != data.end()) {
+      std::rotate(data.begin(), it, data.end());
+  }
+
+  // Print the modified vector
+  for (int value : data) {
+    std::cout << value << "" "";
+  }
+  std::cout << std::endl;
+
+  return 0;
+}","std::rotate(data.begin(), it, data.end());"
+"#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+
+int main() {
+  std::vector<std::string> names = {""Alice"", ""Bob"", ""Charlie"", ""David"", ""Eve""};
+  std::string search_name = ""Bob"";
+
+  // Find the name
+  auto it = std::find(names.begin(), names.end(), search_name);
+
+  if (it != names.end()) {
+    // Calculate the index
+    size_t index = std::distance(names.begin(), it);
+    std::cout << search_name << "" found at index "" << index << std::endl;
+
+    // Insert a duplicate name before the found name
+    names.insert(it, search_name);
+
+    // Print the updated vector
+    for (const std::string& name : names) {
+      std::cout << name << "" "";
+    }
+    std::cout << std::endl;
+  } else {
+    std::cout << search_name << "" not found."" << std::endl;
+  }
+
+  return 0;
+}","names.insert(it, search_name);"
+"#include <iostream>
+#include <vector>
+#include <functional>
+#include <numeric>
+
+int main() {
+  std::vector<int> values = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+  int threshold = 5;
+
+  // Count the number of values greater than the threshold
+  int count = std::count_if(values.begin(), values.end(), [threshold](int x) { return x > threshold; });
+
+  std::cout << ""Number of values greater than "" << threshold << "": "" << count << std::endl;
+
+  // Calculate the sum of values greater than the threshold
+  int sum = 0;
+  for (int value : values) {
+    if (value > threshold) {
+      sum += value;
+    }
+  }
+
+  std::cout << ""Sum of values greater than "" << threshold << "": "" << sum << std::endl;
+
+  // Calculate the average of values greater than the threshold
+  double average = static_cast<double>(sum) / count;
+  std::cout << ""Average of values greater than "" << threshold << "": "" << average << std::endl;
+
+  return 0;
+}",double average = static_cast<double>(sum) / count;
+"#include <iostream>
+#include <vector>
+#include <algorithm>
+
+struct Point {
+    int x, y;
+};
+
+int main() {
+    std::vector<Point> points = {{1, 2}, {3, 4}, {5, 6}, {7, 8}, {9, 10}}; 
+    
+    // Sort the points based on their x-coordinate
+    std::sort(points.begin(), points.end(), [](const Point& a, const Point& b) { return a.x < b.x; });
+
+    // Print the sorted points
+    for (const auto& point : points) {
+        std::cout << ""("" << point.x << "", "" << point.y << "")"" << std::endl;
+    }
+    
+    // Find the first point with y > 5
+    auto it = std::find_if(points.begin(), points.end(), [](const Point& p) { return p.y > 5; });
+
+    if (it != points.end()) {
+        // Calculate the distance between the first point and the found point
+        int distance = std::abs(points[0].x - it->x) + std::abs(points[0].y - it->y);
+        std::cout << ""Distance: "" << distance << std::endl;
+    }
+    else {
+        std::cout << ""No point with y > 5 found."" << std::endl;
+    }
+
+    return 0;
+}",int distance = std::abs(points[0].x - it->x) + std::abs(points[0].y - it->y);
+"#include <iostream>
+#include <string>
+#include <vector>
+#include <map>
+
+int main() {
+  std::map<std::string, int> word_counts;
+  std::vector<std::string> words = {""apple"", ""banana"", ""apple"", ""orange"", ""banana"", ""apple""};
+
+  for (const std::string& word : words) {
+    word_counts[word]++;
+  }
+
+  std::cout << ""Word Counts:\n"";
+  for (const auto& pair : word_counts) {
+    std::cout << pair.first << "": "" << pair.second << std::endl;
+  }
+
+  // Find the most frequent word
+  std::string most_frequent_word;
+  int max_count = 0;
+  for (const auto& pair : word_counts) {
+    if (pair.second > max_count) {
+      max_count = pair.second;
+      most_frequent_word = pair.first;
+    }
+  }
+
+  std::cout << ""Most frequent word: "" << most_frequent_word << "", count: "" << max_count << std::endl;
+
+  return 0;
+}",if (pair.second > max_count)
+"#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+  std::vector<int> data = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+  int target = 5;
+
+  // Find the first element greater than the target
+  auto it = std::find_if(data.begin(), data.end(), [target](int x) { return x > target; });
+
+  if (it != data.end()) {
+    // Calculate the index of the found element
+    int index = std::distance(data.begin(), it);
+    std::cout << ""First element greater than "" << target << "" found at index: "" << index << std::endl;
+
+    // Calculate the sum of elements from the beginning to the found element
+    int sum = 0;
+    for (int i = 0; i <= index; ++i) {
+      sum += data[i];
+    }
+    std::cout << ""Sum of elements up to index "" << index << "": "" << sum << std::endl;
+  } else {
+    std::cout << ""No element greater than "" << target << "" found."" << std::endl;
+  }
+
+  return 0;
+}",for (int i = 0; i <= index; ++i)
+,
+"#include <iostream>
+#include <vector>
+#include <numeric>
+#include <algorithm>
+
+int main() {
+  std::vector<double> values = {1.0, 2.5, 3.7, 4.2, 5.1};
+
+  // Calculate the average value
+  double sum = std::accumulate(values.begin(), values.end(), 0.0);
+  double average = sum / values.size();
+  std::cout << ""Average: "" << average << std::endl;
+
+  // Find values greater than the average
+  std::vector<double> above_average_values;
+  std::copy_if(values.begin(), values.end(), std::back_inserter(above_average_values), 
+               [average](double value) { return value > average; });
+
+  std::cout << ""Values above average: "";
+  for (double value : above_average_values) {
+    std::cout << value << "" "";
+  }
+  std::cout << std::endl;
+
+  // Calculate the standard deviation
+  double sq_sum = std::inner_product(values.begin(), values.end(), values.begin(), 0.0);
+  double stdev = std::sqrt(sq_sum / values.size() - average * average);
+  std::cout << ""Standard Deviation: "" << stdev << std::endl;
+
+  return 0;
+}",double stdev = std::sqrt(sq_sum / values.size() - average * average);
+"#include <iostream>
+#include <string>
+#include <vector>
+#include <map>
+
+int main() {
+    std::vector<std::string> words = {""apple"", ""banana"", ""apple"", ""orange"", ""banana"", ""grape""};
+    std::map<std::string, int> word_counts;
+
+    for (const std::string& word : words) {
+        word_counts[word]++;
+    }
+
+    std::cout << ""Word Counts:\n"";
+    for (const auto& pair : word_counts) {
+        std::cout << pair.first << "": "" << pair.second << std::endl;
+    }
+
+    // Find the most frequent word
+    std::string most_frequent_word;
+    int max_count = 0;
+    for (const auto& pair : word_counts) {
+        if (pair.second > max_count) {
+            max_count = pair.second;
+            most_frequent_word = pair.first;
+        }
+    }
+
+    std::cout << ""Most frequent word: "" << most_frequent_word << "", count: "" << max_count << std::endl;
+
+    //Check if the word ""apple"" exists in the map. If so, print its count.
+    if(word_counts.find(""apple"") != word_counts.end()){
+      std::cout << ""Count of apple: "" << word_counts[""apple""] << std::endl;
+    }
+
+    return 0;
+}","if(word_counts.find(""apple"") != word_counts.end()){
+      std::cout << ""Count of apple: "" << word_counts[""apple""] << std::endl;
+    }"
+"#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> data = {1, 2, 3, 4, 5};
+  size_t index = 0;
+
+  while (index < data.size() + 1) {
+    std::cout << data[index] << std::endl;
+    ++index;
+  }
+
+  return 0;
+}",index < data.size() + 1
+"#include <iostream>
+#include <string>
+#include <algorithm>
+
+int main() {
+  std::string input = ""hello"";
+  std::string reversed_input;
+
+  std::reverse(input.begin(), input.end());
+  reversed_input = input;
+
+  if (reversed_input == ""olleh"") {
+    std::cout << ""Palindrome!"" << std::endl;
+  } else {
+    std::cout << ""Not a palindrome."" << std::endl;
+  }
+
+  return 0;
+}",reversed_input = input;
+"#include <iostream>
+#include <vector>
+#include <numeric>
+
+int main() {
+  std::vector<int> numbers = {1, 2, 3, 4, 5};
+  double sum = 0.0;
+
+  for (int number : numbers) {
+    sum += number;
+  }
+
+  double average = sum / numbers.size();
+  std::cout << ""Average: "" << average << std::endl;
+
+  return 0;
+}",double sum = 0.0;
+"#include <iostream>
+#include <string>
+#include <algorithm>
+
+int main() {
+  std::string text = ""This is a test string."";
+  std::string pattern = ""test"";
+  size_t pos = text.find(pattern);
+
+  while (pos != std::string::npos) {
+    text.replace(pos, pattern.length(), ""exam"");
+    pos = text.find(pattern, pos + 1);
+  }
+
+  std::cout << text << std::endl;
+
+  return 0;
+}","pos = text.find(pattern, pos + 1);"
+"#include <iostream>
+#include <vector>
+
+int main() {
+  std::vector<int> data = {1, 2, 3, 4, 5};
+  int threshold = 3;
+
+  for (size_t i = 0; i < data.size(); ++i) {
+    if (data[i] > threshold) {
+      data.insert(data.begin() + i, 0);
+      ++i; // Crucial increment to avoid infinite loop
+    }
+  }
+
+  for (int value : data) {
+    std::cout << value << "" "";
+  }
+  std::cout << std::endl;
+
+  return 0;
+}",++i;
+"#include <iostream>
+#include <string>
+#include <algorithm>
+
+int main() {
+  std::string input = ""abcdefg"";
+  std::string reversed_input = input;
+  std::reverse(reversed_input.begin(), reversed_input.end());
+
+  if (input == reversed_input) {
+    std::cout << ""Palindrome!"" << std::endl;
+  } else {
+    std::cout << ""Not a palindrome."" << std::endl;
+  }
+
+  return 0;
+}",if (input == reversed_input)
+"#include <iostream>
+#include <vector>
+#include <numeric>
+
+int main() {
+  std::vector<double> values = {1.0, 2.0, 3.0, 4.0, 5.0};
+  double sum = std::accumulate(values.begin(), values.end(), 0.0);
+  double average = sum / values.size();
+
+  std::cout << ""Average: "" << average << std::endl;
+
+  return 0;
+}",0.0
+"#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+  std::vector<int> numbers = {5, 2, 8, 1, 9};
+  std::vector<int> sorted_numbers = numbers;
+
+  std::sort(sorted_numbers.begin(), sorted_numbers.end());
+
+  for (size_t i = 0; i < numbers.size(); ++i) {
+    numbers[i] = sorted_numbers[i];
+  }
+
+  for (int number : numbers) {
+    std::cout << number << "" "";
+  }
+  std::cout << std::endl;
+
+  return 0;
+}",numbers[i] = sorted_numbers[i];
+"#include <iostream>
+#include <string>
+#include <sstream>
+
+int main() {
+  std::string input = ""123.45"";
+  double value;
+  std::stringstream ss(input);
+  ss >> value;
+
+  if (ss.fail()) {
+    std::cout << ""Conversion failed!"" << std::endl;
+  } else {
+    std::cout << ""Value: "" << value << std::endl;
+  }
+
+  return 0;
+}",std::stringstream ss(input);
+"#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+  std::vector<int> data = {1, 2, 3, 4, 5};
+  std::vector<int> result;
+
+  std::transform(data.begin(), data.end(), std::back_inserter(result), [](int x) { return x * 2; });
+
+  for (size_t i = 0; i < data.size(); ++i) {
+    std::cout << result[i] << "" "";
+  }
+  std::cout << std::endl;
+
+  return 0;
+}",for (size_t i = 0; i < data.size(); ++i)
+"#include <iostream>
+#include <map>
+#include <string>
+
+int main() {
+  std::map<std::string, int> counts;
+  counts[""apple""] = 5;
+  counts[""banana""] = 3;
+  counts[""orange""] = 7;
+
+  for (const auto& pair : counts) {
+    std::cout << pair.first << "": "" << pair.second << std::endl;
+  }
+
+  counts.erase(""banana"");
+
+  for (const auto& pair : counts) {
+    std::cout << pair.first << "": "" << pair.second << std::endl;
+  }
+
+  return 0;
+}","counts.erase(""banana"");"
+"#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+  std::vector<int> numbers = {1, 2, 3, 4, 5};
+  std::vector<int> even_numbers;
+
+  std::copy_if(numbers.begin(), numbers.end(), std::back_inserter(even_numbers), [](int n) { return n % 2 == 0; });
+
+  for (int i = 0; i < even_numbers.size(); ++i) {
+    std::cout << even_numbers[i] << "" "";
+  }
+  std::cout << std::endl;
+
+  return 0;
+}","std::copy_if(numbers.begin(), numbers.end(), std::back_inserter(even_numbers), [](int n) { return n % 2 == 0; });"
+"#include <iostream>
+#include <string>
+#include <vector>
+
+int main() {
+  std::vector<std::string> names = {""Alice"", ""Bob"", ""Charlie""};
+  std::string target = ""Bob"";
+
+  auto it = std::find(names.begin(), names.end(), target);
+
+  if (it != names.end()) {
+    std::cout << ""Found "" << target << "" at index: "" << std::distance(names.begin(), it) << std::endl;
+  }
+  else {
+    std::cout << ""Not found"" << std::endl;
+  }
+
+  names.insert(names.begin() + std::distance(names.begin(), it), ""David"");
+
+  for (const auto& name : names) {
+    std::cout << name << "" "";
+  }
+  std::cout << std::endl;
+
+  return 0;
+}","names.insert(names.begin() + std::distance(names.begin(), it), ""David"");"
+"#include <iostream>
+#include <vector>
+#include <functional>
+
+int main() {
+  std::vector<int> data = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+  std::vector<int> result;
+
+  std::function<void(int)> process = [&](int value) {
+    if (value % 2 == 0) {
+      result.push_back(value * 2);
+    }
+    else {
+      process(value * 2);
+    }
+  };
+
+  for (int x : data) {
+    process(x);
+  }
+
+  for (int val : result) {
+    std::cout << val << "" "";
+  }
+  std::cout << std::endl;
+
+  return 0;
+}",process(value * 2);
+"#include <iostream>
+#include <map>
+#include <string>
+
+int main() {
+  std::map<std::string, int> counts;
+  counts[""apple""] = 5;
+  counts[""banana""] = 3;
+  counts[""orange""] = 7;
+
+  for (auto const& [key, val] : counts) {
+    std::cout << key << "": "" << val << std::endl;
+  }
+
+  auto it = counts.find(""grape"");
+  if (it != counts.end()) {
+    std::cout << ""Grape count: "" << it->second << std::endl;
+  } else {
+    std::cout << ""Grape not found"" << std::endl;
+  }
+
+  counts.erase(it);
+
+  for (auto const& [key, val] : counts) {
+    std::cout << key << "": "" << val << std::endl;
+  }
+
+  return 0;
+}",counts.erase(it);
+"#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+  std::vector<int> numbers = {1, 2, 3, 4, 5};
+  std::vector<int> even_numbers;
+
+  std::copy_if(numbers.begin(), numbers.end(), std::back_inserter(even_numbers), [](int n){ return n % 2 == 0; });
+
+  for (int num : even_numbers) {
+    std::cout << num << "" "";
+  }
+  std::cout << std::endl;
+
+  // Attempt to find the maximum even number
+  if (!even_numbers.empty()) {
+    auto max_it = std::max_element(even_numbers.begin(), even_numbers.end());
+    std::cout << ""Maximum even number: "" << *max_it << std::endl;
+  } else {
+    std::cout << ""No even numbers found."" << std::endl;
+  }
+
+  return 0;
+}","std::copy_if(numbers.begin(), numbers.end(), std::back_inserter(even_numbers), [](int n){ return n % 2 == 0; });"
+"#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+
+int main() {
+  std::vector<std::string> names = {""Alice"", ""Bob"", ""Charlie"", ""David""};
+  std::string target_name = ""Bob"";
+
+  auto it = std::find(names.begin(), names.end(), target_name);
+
+  if (it != names.end()) {
+    std::cout << ""Found "" << target_name << "" at index "" << std::distance(names.begin(), it) << std::endl;
+    names.erase(it);
+    it = std::find(names.begin(), names.end(), target_name); // Attempt to find again
+    if (it != names.end()) {
+      std::cout << ""Found again!"" << std::endl;
+    }
+  } else {
+    std::cout << target_name << "" not found."" << std::endl;
+  }
+
+  for (const auto& name : names) {
+    std::cout << name << "" "" ;
+  }
+  std::cout << std::endl;
+
+  return 0;
+}","it = std::find(names.begin(), names.end(), target_name);"
+"#include <iostream>
+#include <vector>
+#include <numeric>
+
+int main() {
+  std::vector<int> data = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+  int sum = 0;
+
+  // Calculate the sum of elements using std::accumulate
+  sum = std::accumulate(data.begin(), data.end(), sum);
+
+  std::cout << ""Sum of elements: "" << sum << std::endl;
+
+  // Calculate the average
+  double average = static_cast<double>(sum) / data.size();
+  std::cout << ""Average of elements: "" << average << std::endl;
+
+  return 0;
+}","sum = std::accumulate(data.begin(), data.end(), sum);"
+"#include <iostream>
+#include <string>
+#include <vector>
+#include <sstream>
+
+int main() {
+  std::string input = ""10 20 30 40 50"";
+  std::stringstream ss(input);
+  std::vector<int> numbers;
+  int num;
+
+  while (ss >> num) {
+    numbers.push_back(num);
+  }
+
+  // Calculate the sum of the numbers
+  int sum = 0;
+  for (size_t i = 0; i < numbers.size(); ++i) {
+    sum += numbers[i];
+  }
+
+  std::cout << ""Sum of numbers: "" << sum << std::endl;
+
+  return 0;
+}",for (size_t i = 0; i < numbers.size(); ++i)
+"#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+  std::vector<int> values = {1, 2, 3, 4, 5};
+  std::vector<int> sorted_values = values;
+  std::sort(sorted_values.begin(), sorted_values.end());
+
+  // Find the difference between the original and sorted vectors
+  std::vector<int> diff;
+  for (size_t i = 0; i < values.size(); ++i) {
+    diff.push_back(values[i] - sorted_values[i]);
+  }
+
+  // Print the differences
+  for (int d : diff) {
+    std::cout << d << "" "";
+  }
+  std::cout << std::endl;
+
+  return 0;
+}",diff.push_back(values[i] - sorted_values[i]);
+"#include <iostream>
+#include <vector>
+#include <functional>
+
+int main() {
+  std::vector<std::function<int(int)>> functions;
+  functions.push_back([](int x) { return x * 2; });
+  functions.push_back([](int x) { return x + 5; });
+
+  int value = 10;
+
+  for (auto& func : functions) {
+    value = func(value);
+  }
+
+  std::cout << ""Final value: "" << value << std::endl;
+
+  return 0;
+}",for (auto& func : functions)
+"#include <iostream>
+#include <string>
+#include <vector>
+
+int main() {
+  std::vector<std::string> names = {""Alice"", ""Bob"", ""Charlie""};
+  std::string search_name = ""David"";
+
+  bool found = false;
+  for (const auto& name : names) {
+    if (name == search_name) {
+      found = true;
+      break;
+    }
+  }
+
+  if (found) {
+    std::cout << search_name << "" found in the list.\n"";
+  } else {
+    std::cout << search_name << "" not found in the list.\n"";
+  }
+
+  return 0;
+}",if (name == search_name)
+"#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+  std::vector<int> data = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+  int threshold = 5;
+
+  std::vector<int> filtered_data;
+  std::copy_if(data.begin(), data.end(), std::back_inserter(filtered_data), [threshold](int x) { return x > threshold; });
+
+  // Print the filtered data
+  for (int value : filtered_data) {
+    std::cout << value << "" "";
+  }
+  std::cout << std::endl;
+
+  return 0;
+}",[threshold](int x) { return x > threshold; }
+"#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+
+int main() {
+  std::vector<std::string> words = {""apple"", ""banana"", ""cherry"", ""date""};
+  std::string prefix = ""ban"";
+
+  std::vector<std::string> matching_words;
+  std::copy_if(words.begin(), words.end(), std::back_inserter(matching_words), [&](const std::string& word) {
+    return word.rfind(prefix, 0) == 0;
+  });
+
+  for (const auto& word : matching_words) {
+    std::cout << word << std::endl;
+  }
+
+  return 0;
+}","word.rfind(prefix, 0) == 0"
